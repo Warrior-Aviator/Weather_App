@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: url("{{ url_for('static', filename=bg_image) }}") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            padding: 20px;
+            transition: background 0.5s ease-in-out;
+        }
+        .container {
+            margin-top: 5%;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+        input {
+            padding: 10px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #ff9800;
+            color: white;
+            transition: 0.3s;
+        }
+        button:hover {
+            background: #e68900;
+        }
+        .weather-info {
+            margin-top: 20px;
+        }
+        .forecast {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .forecast div {
+            background: rgba(255, 255, 255, 0.2);
+            margin: 10px;
+            padding: 15px;
+            border-radius: 10px;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+        <input type="text" id="city" placeholder="Enter city name">
+        <button onclick="getWeather()">Check Weather</button>
+
+        <div class="weather-info">
+            {% if city %}
+                <h2>{{ city }}</h2>
+                <p>Temperature: {{ current.temperature }}°C</p>
+                <p>Condition: {{ current.condition }}</p>
+                <p>Humidity: {{ current.humidity }}%</p>
+                <p>Wind Speed: {{ current.wind_speed }} m/s</p>
+                <p>Wind Direction: {{ current.wind_direction }}°</p>
+                <p>Sunrise: {{ current.sunrise }} UTC</p>
+                <p>Sunset: {{ current.sunset }} UTC</p>
+
+                <h2>5-Day Forecast</h2>
+                <div class="forecast">
+                    {% for day in forecast %}
+                        <div>
+                            <h3>{{ day.date }}</h3>
+                            <p>Temp: {{ day.temp }}°C</p>
+                            <p>Condition: {{ day.condition }}</p>
+                            <p>Humidity: {{ day.humidity }}%</p>
+                            <p>Wind: {{ day.wind_speed }} m/s</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function getWeather() {
+            let city = document.getElementById('city').value;
+            window.location.href = '/?city=' + city;
+        }
+    </script>
+</body>
+</html>
