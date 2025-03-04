@@ -3,7 +3,7 @@
 
 # Overview
 
-pplication that fetches real-time weather data and a 5-day forecast for any city using the OpenWeatherMap API. The app dynamically changes the background based on weather conditions.
+Application that fetches real-time weather data and a 5-day forecast for any city using the OpenWeatherMap API. The app dynamically changes the background based on weather conditions.
 
 
 # Features
